@@ -158,7 +158,11 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
 # Allow all host headers
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'sleepy-chamber-85403.herokuapp.com',
+    'salty-earth-19583.herokuapp.com',
+    ]
+
 if 'HOST' in os.environ:
     ALLOWED_HOSTS.append(os.environ['HOST'])
 
