@@ -27,7 +27,7 @@ SECRET_KEY = os.environ.get(
 'qqvw6j_+^jig#)@*pj03b!1fru!hlw19bwpr3mc^ksxv_3ty^a')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = 'PROD' not in os.environ
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -133,6 +133,11 @@ USE_TZ = True
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 
+CORS_ORIGIN_WHITELIST = (
+    '0.0.0.0:4000',
+    'localhost:4000',
+)
+
 # Tell Django about the custom `User` model we created. The string
 # `authentication.User` tells Django we are referring to the `User` model in
 # the `authentication` module. This module is registered above in a setting
@@ -153,10 +158,6 @@ REST_FRAMEWORK = {
 # Change 'default' database configuration with $DATABASE_URL.
 DATABASES['default'].update(dj_database_url.config(conn_max_age=500))
 
-# Honor the 'X-Forwarded-Proto' header for request.is_secure()
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
-
 # Allow all host headers
 ALLOWED_HOSTS = [
     'sleepy-chamber-85403.herokuapp.com',
@@ -166,9 +167,6 @@ ALLOWED_HOSTS = [
 if 'HOST' in os.environ:
     ALLOWED_HOSTS.append(os.environ['HOST'])
 
-INTERNAL_IPS = [
-    '127.0.0.1',
-]
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
